@@ -1,0 +1,61 @@
+<body *ngIf="chocolateData !== undefined">
+	<div
+	  class="p-5 text-center bg-image"
+	  style="
+		background-image: url('https://img5.goodfon.com/original/1366x768/c/60/shokolad-kakao-struzhka-orekhi.jpg');
+		height: 300px;
+	  "
+	>
+	  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+		<div class="d-flex justify-content-center align-items-center h-100">
+		  <div class="text-white">
+			<h1>{{title}}</h1>
+			<h4>{{subTitle}}</h4>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  <br />
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th style="color:rgb(68, 65, 58);" scope="col">#</th>
+			<th style="color:rgb(68, 65, 58);" scope="col">Name</th>
+			<th style="color:rgb(68, 65, 58);" scope="col">Brand</th>
+			<th style="color:rgb(68, 65, 58);" scope="col">Lowest price per 100g</th>
+			<th style="color:rgb(68, 65, 58);" scope="col">Average price per 100g</th>
+			<th style="color:rgb(68, 65, 58);" scope="col">Cheapest shop</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr role="button" (click)="onClick(chocolate)" *ngFor="let chocolate of chocolateData.data | paginate: { 
+				itemsPerPage: chocolateData.pagination.limit,
+				totalItems: chocolateData.pagination.total,
+				currentPage: chocolateData.pagination.offset
+			}"
+		>
+			<th style="color:rgb(68, 65, 58);" scope="row">{{chocolate.id}}</th>
+			<td style="color:rgb(94, 76, 31);" scope="row">{{chocolate.name}}</td>
+			<td style="color:rgb(94, 76, 31);" scope="row">{{chocolate.brand}}</td>
+			<td style="color:rgb(94, 76, 31);" scope="row">
+				<div *ngIf="isNumber(getLowestPrice(chocolate.prices))">
+					{{getLowestPrice(chocolate.prices)}} {{chocolate.currency}}
+				</div>
+				<div *ngIf="!isNumber(getLowestPrice(chocolate.prices))">
+					No data
+				</div>
+			</td>
+			<td style="color:rgb(94, 76, 31);" scope="row">
+				<div *ngIf="isNumber(getAveragePrice(chocolate.prices))">
+					{{getAveragePrice(chocolate.prices)}} {{chocolate.currency}}
+				</div>
+				<div *ngIf="!isNumber(getAveragePrice(chocolate.prices))">
+					No data
+				</div>
+			</td>
+			<td style="color:rgb(94, 76, 31);" scope="row">{{getCheapestShop(chocolate.prices)}}</td>
+		</tr>
+	</tbody>
+</table>
+<pagination-controls (pageChange)="chocolateData.pagination.offset = $event"></pagination-controls>
+</body>

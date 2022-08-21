@@ -1,0 +1,33 @@
+<body>
+	<h1 style="color:rgb(94, 76, 31);">
+		{{data?.name}}/{{data?.brand}}
+	</h1>
+	<table *ngIf="data?.prices?.length !== 0" class="table table-striped" >
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Price</th>
+				<th scope="col">Amount</th>
+				<th scope="col">Shop</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let price of data?.prices">
+				<td scope="row">#</td>
+				<td scope="row">
+					<div *ngIf="isCheapestShop(price)">
+						<mark>{{price.price}}{{data?.currency}}</mark>
+					</div>
+					<div *ngIf="!isCheapestShop(price)">
+						{{price.price}}{{data?.currency}}
+					</div>
+				</td>
+				<td scope="row">{{price.amount}}{{price.unit}}</td>
+				<td scope="row">{{price.link}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="divChart">
+		<canvas id="nutrition"></canvas>
+	</div>
+</body>
