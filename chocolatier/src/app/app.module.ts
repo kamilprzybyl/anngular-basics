@@ -7,7 +7,6 @@ import { ChocolateComponent } from './components/chocolate/chocolate.component';
 import { ChocolateDetailsComponent } from './components/chocolate-details/chocolate-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
 	NgxPaginationModule,
 	NgbModule,
-	// NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
